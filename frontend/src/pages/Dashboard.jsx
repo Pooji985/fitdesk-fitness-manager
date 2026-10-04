@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import BackendStatusCard from '../components/BackendStatusCard';
 import { dashboardService } from '../services/dashboardService';
 import {
   Calendar,
@@ -11,8 +10,6 @@ import {
   ArrowRight,
   TrendingUp,
   Award,
-  Layers,
-  CheckCircle2,
   AlertTriangle,
   RefreshCw,
   Clock,
@@ -236,79 +233,8 @@ export default function Dashboard({ onNavigate }) {
           </div>
         </div>
 
-        {/* Live Backend Connection Card (1 Col) */}
-        <div className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider">
-              System Diagnostics
-            </h2>
-            <span className="text-xs text-slate-500">FastAPI + SQLite</span>
-          </div>
-          <BackendStatusCard />
-        </div>
       </div>
 
-      {/* Implementation Roadmap Progress */}
-      <section className="space-y-4 pt-2">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-emerald-400" />
-            <h2 className="text-sm font-bold text-slate-300 uppercase tracking-wider">
-              Project Architecture Roadmap
-            </h2>
-          </div>
-          <span className="text-xs text-emerald-400 font-medium">Stages 1–4 Completed</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-          {[
-            { id: 1, name: 'Tooling & Backend Bridge', status: 'completed', desc: 'React, Vite, Tailwind CSS & FastAPI connection' },
-            { id: 2, name: 'App Shell & Role Context', status: 'completed', desc: 'Navigation, Admin/Trainer/Member role switcher' },
-            { id: 3, name: 'Dashboard & System Metrics', status: 'completed', desc: 'Real-time SQLite KPIs, role metrics & activity feed' },
-            { id: 4, name: 'Classes & Open-Meteo Weather', status: 'completed', desc: 'Live class timetable, outdoor weather alerts & class creation' },
-            { id: 5, name: 'Bookings & Attendance', status: 'next', desc: 'Self-service reservations & digital check-in' },
-            { id: 6, name: 'Member Directory & Polish', status: 'upcoming', desc: 'Tier management & responsive finalization' },
-          ].map((stage) => {
-            const isDone = stage.status === 'completed';
-            const isNext = stage.status === 'next';
-            return (
-              <div
-                key={stage.id}
-                className={`p-3.5 rounded-xl border transition-all duration-200 ${
-                  isDone
-                    ? 'glass-card border-emerald-500/40 bg-emerald-950/20'
-                    : isNext
-                    ? 'glass-card border-cyan-500/40 bg-cyan-950/20 shadow-sm shadow-cyan-500/10'
-                    : 'glass-card border-slate-800/80 opacity-60'
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <span
-                    className={`text-[11px] font-bold px-2 py-0.5 rounded ${
-                      isDone
-                        ? 'bg-emerald-500/20 text-emerald-300'
-                        : isNext
-                        ? 'bg-cyan-500/20 text-cyan-300'
-                        : 'bg-slate-800 text-slate-400'
-                    }`}
-                  >
-                    Stage 0{stage.id}
-                  </span>
-                  {isDone ? (
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                  ) : isNext ? (
-                    <span className="text-[10px] text-cyan-300 font-semibold uppercase tracking-wider">Next Up</span>
-                  ) : (
-                    <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold">Pending</span>
-                  )}
-                </div>
-                <h3 className="text-xs font-semibold text-slate-200 mt-2">{stage.name}</h3>
-                <p className="text-[11px] text-slate-400 mt-0.5">{stage.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-      </section>
     </div>
   );
 }

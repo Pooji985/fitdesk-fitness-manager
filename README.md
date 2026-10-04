@@ -1,34 +1,106 @@
-# FitDesk Fitness Manager
+# FitDesk – Fitness Class & Membership Manager
 
-FitDesk is a React/Vite frontend with a FastAPI/SQLAlchemy backend and SQLite storage. It supports JWT sign-in, role-based access, class scheduling, outdoor forecasts, member bookings/cancellations, attendance, and Admin member management.
+FitDesk is a full-stack fitness management application designed to manage gym members, fitness classes, bookings, attendance, and outdoor class weather conditions.
 
-## Run locally
+The application is built with a React/Vite frontend and a FastAPI/SQLAlchemy backend using SQLite for local data storage. It includes JWT authentication and role-based access for Admin, Trainer, and Member users.
 
-1. Configure `JWT_SECRET_KEY` in `backend/.env` with a random value of at least 32 characters. Keep `.env` private.
-2. Start the API from `backend/` using the project Python environment:
+## Features
 
-	```powershell
-	.\venv\Scripts\python.exe -m uvicorn app.main:app --reload --port 8000
-	```
+### Authentication & Role-Based Access
 
-3. In another terminal, start the frontend:
+- JWT-based authentication
+- Role-based access control
+- Separate workflows for Admin, Trainer, and Member
+- Secure password hashing
+- Protected backend API endpoints
 
-	```powershell
-	cd frontend
-	npm install
-	npm run dev
-	```
+### Class & Schedule Management
 
-The API uses `backend/fitdesk.db`; password hashes use the separate `backend/fitdesk-auth.db`. Existing seed accounts have no documented default passwords; provision a local demo password with `python -m app.cli set-password <email>` from `backend/`.
+- Create and manage fitness classes
+- Indoor and outdoor class support
+- Trainer assignment
+- Class capacity management
+- Class editing and cancellation
+- Schedule filtering
+- Upcoming class information
 
-## Tests and build
+### Outdoor Weather Integration
 
-Backend tests are `unittest` integration tests. They initialize and write to their configured databases, so set `DATABASE_URL` and `AUTH_DATABASE_URL` to disposable copies before running:
+- Open-Meteo weather integration for outdoor classes
+- Weather information based on class location and time
+- Weather status indicators
+- Graceful handling when weather information is unavailable
 
-```powershell
-backend\venv\Scripts\python.exe -m unittest discover -s tests/backend -p 'test*.py' -v
-```
+### Bookings & Attendance
 
-Build the frontend with `cd frontend; npm run build`. No frontend automated test runner is currently configured.
+- Member class bookings
+- Booking cancellation
+- Capacity validation
+- Attendance tracking
+- Booking and attendance history
+- Attendance statuses such as Booked, Attended, Cancelled, and No Show
 
-See [docs/USER_GUIDE.md](docs/USER_GUIDE.md) for role workflows and known scope limits. API docs are at `/api/v1/docs` while the backend is running.
+### Member Management
+
+- Admin member directory
+- Member activation and deactivation
+- Membership tier management
+- Member profile management
+- Emergency contact information
+
+### Role-Based Dashboards
+
+- Admin dashboard with gym-level metrics
+- Trainer dashboard with assigned classes and attendance information
+- Member dashboard with personal bookings and attendance
+- Recent activity feed
+- Live database metrics
+
+## Tech Stack
+
+| Layer | Technologies |
+|---|---|
+| Frontend | React, Vite, Tailwind CSS |
+| Backend | Python, FastAPI |
+| ORM | SQLAlchemy |
+| Database | SQLite |
+| Authentication | JWT |
+| Weather API | Open-Meteo |
+| Testing | Python unittest |
+| Version Control | Git, GitHub |
+
+## Project Structure
+
+```text
+fitdesk-fitness-manager/
+│
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── db/
+│   │   ├── models/
+│   │   ├── schemas/
+│   │   └── services/
+│   ├── requirements.txt
+│   └── ...
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── services/
+│   ├── package.json
+│   └── vite.config.js
+│
+├── tests/
+│   └── backend/
+│
+├── docs/
+│   ├── PROJECT_SPECIFICATION.md
+│   └── USER_GUIDE.md
+│
+├── .gitignore
+├── README.md
+└── ...

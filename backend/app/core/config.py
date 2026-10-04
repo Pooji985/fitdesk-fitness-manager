@@ -15,9 +15,10 @@ class Settings(BaseSettings):
 
     # Allowed CORS origins for frontend client (e.g. Vite default port)
     BACKEND_CORS_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ]
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://frontend-rsnd.onrender.com",
+]
 
     model_config = SettingsConfigDict(
         env_file=BACKEND_DIR / ".env",

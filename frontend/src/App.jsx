@@ -44,7 +44,6 @@ function AppShell() {
             {activeTab === 'schedule' && <Schedule />}
             {activeTab === 'bookings' && <Bookings onNavigate={setActiveTab} />}
             {activeTab === 'profile' && <MyProfile />}
-            {activeTab === 'profile' && <MyProfile />}
             {activeTab === 'members' && (
               isAdmin ? (
                 <Members />

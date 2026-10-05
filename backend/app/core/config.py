@@ -13,6 +13,10 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY: Optional[str] = None
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
+    # Demo staff credentials for deployed application
+    DEMO_ADMIN_PASSWORD: Optional[str] = None
+    DEMO_TRAINER_PASSWORD: Optional[str] = None
+
     # Allowed CORS origins for frontend client (e.g. Vite default port)
     BACKEND_CORS_ORIGINS: List[str] = [
     "http://localhost:5173",
